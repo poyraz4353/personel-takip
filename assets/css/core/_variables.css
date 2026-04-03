@@ -1,0 +1,67 @@
+/* =================================================== */
+/* CSS DEĞİŞKENLERİ (Tüm projede kullanılacak)        */
+/* =================================================== */
+:root {
+    /* Renk Paleti */
+    --primary-color: #a6192e;
+    --primary-dark: #8b1527;
+    --secondary-color: #0066b3;
+    --secondary-light: #3385c6;
+    --secondary-dark: #004080;
+    
+    /* Gri Tonlar */
+    --white: #ffffff;
+    --gray-50: #f8f9fa;
+    --gray-100: #e9ecef;
+    --gray-200: #dee2e6;
+    --gray-300: #ced4da;
+    --gray-400: #adb5bd;
+    --gray-500: #6c757d;
+    --gray-600: #495057;
+    --gray-700: #343a40;
+    --gray-800: #212529;
+    --gray-900: #1a1e21;
+    
+    /* Sistem Renkleri */
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+    
+    /* Layout */
+    --header-height: 120px;
+    --sidebar-width: 313px;
+    --content-padding: 13px;
+    
+    /* Z-index Katmanları */
+    --z-header: 1000;
+    --z-sidebar: 999;
+    --z-modal: 1050;
+    --z-alert: 1100;
+    
+    /* Animasyon */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Gölgeler */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.2);
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+}
+
+/* Karanlık Tema (opsiyonel) */
+[data-theme="dark"] {
+    --primary-color: #d63384;
+    --secondary-color: #0dcaf0;
+    --white: #212529;
+    --gray-50: #343a40;
+    --gray-100: #495057;
+    /* ... diğer değişkenler */
+}

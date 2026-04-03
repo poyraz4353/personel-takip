@@ -1,0 +1,236 @@
+
+
+    body { 
+        padding-top: 110px !important; 
+        font-size: 0.9rem; /* Genel font boyutu küçültüldü */
+    }
+    .search-form { 
+        display: flex; gap: 0.5rem; 
+        flex-grow: 1; 
+        max-width: 500px; 
+    }
+    .search-form .form-control { 
+        width: 100%; 
+        font-size: 0.9rem; /* Arama kutusu fontu küçültüldü */
+    }
+    .add-personnel-btn { 
+        white-space: nowrap; 
+        font-size: 0.9rem; /* Buton fontu küçültüldü */
+    }
+
+	/* TABLODA NET GRİ KENARLIKLAR – ÇOK DAHA BELİRGİN VE PROFESYONEL GÖRÜNÜM */
+	.table {
+		border-collapse: separate !important;
+		border-spacing: 0;
+		box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+		font-size: 0.85rem; /* Tablo fontu küçültüldü */
+	}
+
+	/* Tüm hücrelere ince gri kenarlık */
+	.table th,
+	.table td {
+		border: 1px solid #d0d0d0 !important;
+		padding: 8px 6px; /* Padding biraz azaltıldı */
+	}
+
+	/* Başlık (thead) daha koyu arka plan + beyaz yazı */
+	.table thead th {
+		background-color: #000000 !important;
+		color: white !important;
+		border-color: #1a252f !important;
+		font-weight: 600;
+		font-size: 0.8rem; /* Başlık fontu küçültüldü */
+	}
+
+	/* Satırlara zebra efekti + hover efekti */
+	.table tbody tr:nth-child(even) {
+		background-color: #f8f9fa;
+	}
+
+	.table tbody tr:hover {
+		background-color: #e3f2fd !important;
+		transition: background-color 0.2s ease;
+	}
+
+	/* Uzun metinler taşmasın, gerektiğinde üç nokta koy */
+	.td-long-text {
+		max-width: 353px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: inline-block;
+		font-size: 0.85rem; /* Font küçültüldü */
+	}
+
+	.foto-link {
+		display: inline-block;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+		border-radius: 50%;
+	}
+
+	.foto-link:hover {
+		transform: scale(1.15);
+		box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+	}
+
+	.foto-link::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 123, 255, 0.1);
+		border-radius: 50%;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	.foto-link:hover::after {
+		opacity: 1;
+	}
+
+	.foto-circle {
+		width: 40px;
+		height: 40px;
+		object-fit: cover;
+		border-radius: 50%;
+		border: 2px solid #fff;
+		box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+		transition: all 0.3s ease;
+	}
+
+	.foto-link:hover .foto-circle {
+		border: 3px solid #007bff;
+		box-shadow: 0 0 20px rgba(0, 123, 255, 0.5);
+	}
+
+	.no-photo {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		font-size: 14px;
+		text-transform: uppercase;
+		box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+		transition: all 0.3s ease;
+	}
+
+	.foto-link:hover .no-photo {
+		transform: scale(1.2) rotate(5deg);
+		background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+		box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+	}
+
+    .search-header {
+        display: flex; align-items: center; 
+        justify-content: space-between; 
+        flex-wrap: wrap; gap: 1rem; 
+        margin-bottom: 1rem; /* Biraz azaltıldı */
+    }
+    .search-title h1 { 
+        margin: 0; font-weight: 700; 
+        color: #333; 
+        font-size: 1.4rem; /* Başlık fontu küçültüldü */
+    }
+    
+    .search-form {
+        display: flex;
+        gap: 0.5rem;
+        flex-grow: 1;
+        max-width: 520px;
+    }
+    @media (max-width: 768px) {
+        .search-header { flex-direction: column; align-items: stretch; }
+        .search-form { max-width: none; }
+    }
+    
+    /* SADECE BAŞLIKLARI ORTALAMA */
+    .table th {
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    /* İçerikler normal halinde kalacak */
+    .table td {
+        vertical-align: middle;
+    }
+    
+    /* Fotoğraf ve ID sütunlarını ortala */
+    .table td:first-child,
+    .table td:nth-child(2) {
+        text-align: center;
+    }
+    
+    .kurum-bilgi {
+        font-size: 0.8em; /* Küçültüldü */
+        color: #666;
+    }
+
+	/* Breadcrumb kenarlıksız, arka plan ve gölge ile */
+	.breadcrumb {
+		background-color: #ffffff; /* Beyaz arka plan */
+		border-radius: 5px;        /* Köşe yuvarlatma */
+		padding: 8px 15px;
+		margin-bottom: 15px;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Hafif gölge */
+		height: 40px;
+	}
+
+	.breadcrumb-item a {
+		color: #0066b3; /* Bağlantılar mavi */
+		text-decoration: none;
+	}
+
+	.breadcrumb-item.active {
+		color: #004080; /* Aktif sayfa koyu mavi */
+		font-weight: 600;
+	}
+
+    /* Alert fontlarını küçült */
+    .alert {
+        font-size: 0.85rem; /* Küçültüldü */
+    }
+
+    /* Sayfalama fontunu küçült */
+    .pagination {
+        font-size: 0.85rem; /* Küçültüldü */
+    }
+
+    /* Badge fontunu küçült */
+    .badge {
+        font-size: 0.75em; /* Küçültüldü */
+    }
+
+    /* Tablo içindeki özel stiller */
+    .table .fw-bold {
+        font-size: 0.9rem; /* İsim fontu küçültüldü */
+    }
+
+    /* Tarih ve diğer küçük yazılar */
+    .text-muted {
+        font-size: 0.8rem; /* Küçültüldü */
+    }
+	
+	/* BASİT CİNSİYET RENKLERİ */
+	.badge-erkek {
+		background-color: #1e88e5 !important;
+		color: white !important;
+	}
+
+	.badge-kadin {
+		background-color: #ec407a !important;
+		color: white !important;
+	}
+
+	.badge-belirsiz {
+		background-color: #78909c !important;
+		color: white !important;
+	}

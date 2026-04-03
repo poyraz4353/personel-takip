@@ -1,0 +1,175 @@
+/* =================================================== */
+/* HEADER BİLEŞENİ                                     */
+/* =================================================== */
+.header {
+    height: var(--header-height);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    padding: 0.5rem 0;
+    box-shadow: var(--shadow-lg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-header);
+    display: flex;
+    align-items: center;
+}
+
+.header-title {
+    margin-left: var(--sidebar-width);
+    padding-left: 20px;
+}
+
+.header-title h1 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.header-title i {
+    margin-right: 10px;
+}
+
+/* User Info Area */
+.user-info {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--gray-900);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.92rem;
+    white-space: nowrap;
+    height: 46px;
+    line-height: 1.4;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-info i:first-child {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-right: 6px;
+}
+
+/* Logout Button */
+.logout-btn {
+    color: var(--danger-color) !important;
+    text-decoration: none !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 8px;
+    transition: all var(--transition-fast);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+}
+
+.logout-btn:hover {
+    color: #c82333 !important;
+    background-color: rgba(220, 53, 69, 0.1);
+    text-decoration: none !important;
+}
+
+.logout-btn i {
+    font-size: 1.1rem;
+}
+
+/* Header Feedback Container (for alerts) */
+.header-feedback {
+    position: absolute;
+    top: 100%;
+    left: var(--sidebar-width);
+    right: 0;
+    z-index: var(--z-alert);
+    padding: 10px 20px 0;
+}
+
+/* Responsive Header */
+@media (max-width: 1200px) {
+    .header-title h1 {
+        font-size: 1.5rem;
+    }
+    
+    .user-info {
+        font-size: 0.85rem;
+        padding: 6px 15px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header-title {
+        margin-left: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        height: 100px;
+        padding: 0.3rem 0;
+    }
+    
+    .header-title {
+        margin-left: 250px;
+        padding-left: 15px;
+    }
+    
+    .header-title h1 {
+        font-size: 1.3rem;
+    }
+    
+    .user-info {
+        position: static;
+        transform: none;
+        margin-right: 15px;
+        background: rgba(255, 255, 255, 0.85);
+    }
+    
+    .user-info > div:first-child {
+        display: none; /* Hide welcome text on mobile */
+    }
+    
+    .logout-btn span {
+        display: none; /* Hide "Çıkış" text */
+    }
+    
+    .logout-btn i {
+        font-size: 1.3rem;
+        margin: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-title {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+        padding-left: 0;
+    }
+    
+    .header-title h1 {
+        font-size: 1.1rem;
+    }
+    
+    .user-info {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 4px 8px;
+        height: 36px;
+    }
+}

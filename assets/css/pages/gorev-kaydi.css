@@ -1,0 +1,319 @@
+/* =================================================== */
+/* GÖREV KAYDI SAYFASI                                */
+/* =================================================== */
+
+/* Tablo Container */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    margin-bottom: 20px;
+}
+
+/* Tablo Header */
+.table-header {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    margin: -1px -1px 0 -1px;
+    min-width: 1400px;
+}
+
+/* Tablo Grid Yapısı - 11 SÜTUN */
+.header-row,
+.content-row {
+    display: grid;
+    grid-template-columns: 
+        60px   /* 1. Klasör */
+        120px  /* 2. Başlama Tarihi */
+        120px  /* 3. Ayrılma Tarihi */
+        100px  /* 4. İl */
+        100px  /* 5. İlçe */
+        120px  /* 6. Kurum Kodu */
+        minmax(200px, 1fr)    /* 7. Kurum Adı */
+        140px  /* 8. Kadro Ünvanı */
+        150px  /* 9. Görev Ünvanı */
+        130px  /* 10. Atama Çeşidi */
+        160px; /* 11. Yer Değiştirme Çeşidi */
+    gap: 1px;
+    align-items: stretch;
+    min-width: 1400px;
+}
+
+.header-row {
+    padding: 12px 8px;
+    width: 100%;
+}
+
+.content-row {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    width: 100%;
+}
+
+/* Tablo Hücreleri */
+.header-cell {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-align: center;
+    padding: 12px 6px;
+    text-transform: uppercase;
+    line-height: 1.3;
+    word-break: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    min-height: 34px;
+    flex-wrap: wrap;
+}
+
+.content-cell {
+    padding: 12px 5px;
+    text-align: center;
+    border-right: 1px solid var(--gray-200);
+    font-size: 0.85rem;
+    color: var(--gray-800);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    line-height: 1.3;
+    word-break: break-word;
+    overflow: hidden;
+}
+
+/* Son hücrede border kaldır */
+.header-cell:last-child,
+.content-cell:last-child {
+    border-right: none;
+}
+
+/* Özel Hücre Stilleri */
+.content-cell:nth-child(7) { /* Kurum Adı */
+    text-align: left;
+    justify-content: flex-start;
+    padding: 12px 8px;
+}
+
+.content-cell:nth-child(9) { /* Görevi */
+    text-align: left;
+    justify-content: flex-start;
+    padding: 12px 8px;
+}
+
+/* Hover Efekti */
+.content-row:hover .content-cell {
+    background: #e3f2fd;
+}
+
+/* Tablo Wrapper */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+/* Klasör İkonları */
+.folder-header-icon {
+    display: none !important;
+}
+
+.folder-row-icon {
+    font-size: 22px;
+    color: var(--danger-color);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.folder-row-icon:hover {
+    color: #c82333;
+    transform: scale(1.2);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Görev Kaydı Formu */
+#gorevKaydiFormu {
+    opacity: 1;
+    transform: none;
+    max-width: 999px;
+    margin: 20px auto;
+    width: 90%;
+}
+
+#gorevKaydiFormu .personel-content {
+    padding: 20px;
+}
+
+#gorevKaydiFormu .info-card {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+#gorevKaydiFormu .card-header {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+}
+
+#gorevKaydiFormu .card-header h3 {
+    font-size: 1.2rem;
+}
+
+#gorevKaydiFormu .card-header i {
+    font-size: 1.3rem;
+}
+
+/* Yatay Form Grid - Görev Kaydı İçin */
+#gorevKaydiFormu .horizontal-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#gorevKaydiFormu .form-group-horizontal {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0.3rem;
+    align-items: center;
+    margin-bottom: 0.1rem;
+}
+
+#gorevKaydiFormu .form-group-horizontal .form-label {
+    font-weight: 600;
+    color: var(--gray-800);
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    text-align: left;
+    line-height: 1.4;
+}
+
+/* Devre Dışı Alanlar */
+.disabled-field {
+    background-color: var(--gray-50) !important;
+    color: var(--gray-500) !important;
+    cursor: not-allowed !important;
+}
+
+.disabled-field .form-control,
+.disabled-field .form-select {
+    background-color: var(--gray-50) !important;
+    color: var(--gray-500) !important;
+    border-color: var(--gray-300) !important;
+    cursor: not-allowed !important;
+}
+
+/* Boş Durum Stilleri - Tablo İçin */
+.empty-state-table {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--gray-500);
+}
+
+.empty-state-table .bi-inbox {
+    font-size: 3rem;
+    opacity: 0.5;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Floating Notification */
+.floating-notification {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 300px;
+    max-width: 400px;
+    animation: slideInRight 0.5s ease-out;
+}
+
+.notification-hide {
+    animation: slideOutRight 0.5s ease-in forwards;
+}
+
+/* Sil butonu */
+.sil-butonu {
+    font-size: 16px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    opacity: 0.7;
+}
+
+.sil-butonu:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Silme animasyonu */
+.sil-animasyon {
+    animation: silKaybol 0.5s ease forwards;
+}
+
+@keyframes silKaybol {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+        height: 0;
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
+}
+
+/* Responsive Görev Kaydı */
+@media (max-width: 1400px) {
+    .header-row,
+    .content-row {
+        grid-template-columns: 
+            60px   /* 1. Klasör */
+            120px  /* 2. Başlama Tarihi */
+            120px  /* 3. Ayrılma Tarihi */
+            100px  /* 4. İl */
+            100px  /* 5. İlçe */
+            120px  /* 6. Kurum Kodu */
+            minmax(150px, 1fr)    /* 7. Kurum Adı */
+            140px  /* 8. Görev Unvanı */
+            150px  /* 9. Görevi */
+            130px  /* 10. Atama Çeşidi */
+            160px; /* 11. Yer Değiştirme Çeşidi */
+        min-width: 1400px;
+    }
+    
+    .header-cell,
+    .content-cell {
+        font-size: 0.7rem;
+        padding: 10px 4px;
+    }
+    
+    .folder-row-icon {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    #gorevKaydiFormu {
+        max-width: 95%;
+        margin: 15px auto;
+    }
+    
+    #gorevKaydiFormu .form-group-horizontal {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+    }
+    
+    #gorevKaydiFormu .form-group-horizontal .form-label {
+        margin-bottom: 0.2rem;
+    }
+    
+    .floating-notification {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+}

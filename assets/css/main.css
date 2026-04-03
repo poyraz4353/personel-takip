@@ -1,0 +1,152 @@
+
+/* =================================================== */
+/* PERSONEL TAKİP SİSTEMİ - ANA CSS DOSYASI           */
+/* Tüm bileşenleri ve temel stilleri import eder      */
+/* =================================================== */
+
+/* 1. Temel Dosyalar */
+@import url('core/variables.css');
+@import url('core/reset.css');
+@import url('core/base.css');
+@import url('core/utilities.css');
+@import url('core/animations.css');
+
+/* 2. Bileşenler */
+@import url('components/header.css');
+@import url('components/sidebar.css');
+@import url('components/alerts.css');
+@import url('components/cards.css');
+@import url('components/buttons.css');
+@import url('components/forms.css');
+@import url('components/tables.css');
+@import url('components/modals.css');
+
+/* 3. Layout'lar */
+@import url('layouts/dashboard.css');
+@import url('layouts/personel.css');
+@import url('layouts/admin.css');
+
+/* 4. Pages */
+@import url('pages/personel-list.css');
+
+/* 5. Temalar */
+@import url('themes/default.css');
+
+
+/* Pages (Sayfa-Özel) - Gerektikçe ekleyin */
+/* @import 'pages/dashboard.css'; */
+/* @import 'pages/personel-detay.css'; */
+@import 'pages/gorev-kaydi.css'; */
+/* @import 'pages/personel-ekle.css'; */
+/* @import 'pages/raporlar.css'; */
+/* @import 'pages/ayarlar.css'; */
+
+
+/* 5. Global Overrides ve Özel Stiller */
+/* =================================================== */
+
+/* Content Wrapper - Tüm Sayfalar İçin */
+.content_wrapper {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    padding: var(--content-padding);
+    min-height: calc(100vh - var(--header-height));
+    background-color: var(--gray-50);
+    transition: margin-left var(--transition-normal);
+}
+
+.content {
+    margin-top: 1rem;
+}
+
+/* Sidebar Kapalıyken */
+.sidebar.collapsed + .content_wrapper {
+    margin-left: 70px;
+}
+
+/* Breadcrumb - İçerik Yolu */
+.breadcrumb {
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    padding: 8px 20px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    border-left: 4px solid var(--secondary-color);
+    font-weight: 600;
+}
+
+.breadcrumb-item a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--secondary-dark);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: var(--gray-500);
+    padding: 0 10px;
+}
+
+/* Responsive Content */
+@media (max-width: 992px) {
+    .content_wrapper {
+        margin-left: 280px;
+    }
+    
+    .sidebar.collapsed + .content_wrapper {
+        margin-left: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content_wrapper {
+        margin-left: 0;
+        padding: 10px;
+    }
+    
+    .sidebar.collapsed + .content_wrapper {
+        margin-left: 0;
+    }
+    
+    .breadcrumb {
+        padding: 6px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .header,
+    .sidebar,
+    .feedback-container,
+    .breadcrumb,
+    .btn {
+        display: none !important;
+    }
+    
+    .content_wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .content {
+        margin: 0 !important;
+    }
+    
+    body {
+        background: white !important;
+        font-size: 12pt !important;
+    }
+}

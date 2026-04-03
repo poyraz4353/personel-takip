@@ -1,0 +1,243 @@
+<?php
+/**
+ * GÖREV KAYDI SİSTEMİ - login.php
+ * Tasarım korunarak hata giderme (XAMPP/macOS uyumlu)
+ */
+
+// 1. HATA AYIKLAMAYI AÇ (HTTP 500 yerine gerçek hatayı görmek için)
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// 2. SESSION BAŞLAT (Output Buffering ile XAMPP hatalarını engelle)
+ob_start(); 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// 3. DOSYA YOLUNU KONTROL ET
+$configPath = __DIR__ . '/config/db_config.php';
+if (!file_exists($configPath)) {
+    die("Hata: db_config.php dosyası /config/ klasöründe bulunamadı!");
+}
+require_once $configPath;
+
+// Zaten giriş yapmışsa yönlendir
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+    exit();
+}
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+    
+    if (!empty($username) && !empty($password)) {
+        try {
+            $database = Database::getInstance();
+            
+            // DİKKAT: db_config.php içinde checkLogin metodu var mı kontrol et!
+            // Bazı versiyonlarda bu metod login() olarak geçer.
+            if (method_exists($database, 'checkLogin')) {
+                $user = $database->checkLogin($username, $password);
+            } else {
+                throw new Exception("db_config.php içinde checkLogin metodu tanımlanmamış!");
+            }
+            
+            if ($user) {
+                // Giriş başarılı
+                session_regenerate_id(true); // Güvenlik için ID yenile
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['user_role'] = $user['role'] ?? 'admin';
+                $_SESSION['login_time'] = time();
+                
+                header("Location: dashboard.php");
+                exit();
+            } else {
+                $error = "Kullanıcı adı veya şifre yanlış.";
+                sleep(1); 
+            }
+        } catch (Exception $e) {
+            $error = "Bağlantı hatası: " . $e->getMessage();
+        }
+    } else {
+        $error = "Lütfen kullanıcı adı ve şifrenizi girin.";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap - Personel Takip</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #1abc9c;
+            --light-color: #f5f5f5;
+            --danger-color: #e74c3c;
+        }
+        
+        body { 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            max-width: 450px;
+            width: 100%;
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+                
+        h2 { 
+            text-align: center; 
+            margin-bottom: 30px; 
+            color: var(--secondary-color); 
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo i {
+            font-size: 50px;
+            color: var(--primary-color);
+            background: rgba(52, 152, 219, 0.1);
+            padding: 20px;
+            border-radius: 50%;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary { 
+            background-color: var(--primary-color); 
+            border-color: var(--primary-color); 
+            padding: 12px 25px; 
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        
+        .error { 
+            margin-bottom: 20px; 
+            text-align: center; 
+            color: var(--danger-color);
+            background: rgba(231, 76, 60, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <i class="fas fa-users"></i>
+        </div>
+        <h2>Personel Takip Sistemi</h2>
+        
+        <?php if ($error): ?>
+            <div class="error"><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+        
+        <form method="POST" action="">
+            <div class="mb-3">
+                <label class="form-label">Kullanıcı Adı</label>
+                <input type="text" name="username" class="form-control" placeholder="admin" required autofocus>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Şifre</label>
+                <div class="input-group">
+                    <input type="password" name="password" id="passwordField" class="form-control" placeholder="••••••" required>
+                    <span class="input-group-text bg-white" id="passwordToggle" style="cursor: pointer;">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2 mt-4">
+                <button type="submit" class="btn btn-primary" id="submitBtn">Giriş Yap</button>
+            </div>
+        </form>
+        
+        <div class="footer-text">
+            © <?php echo date('Y'); ?> Personel Takip Sistemi | 
+            <?php 
+                try {
+                    $dbInstance = Database::getInstance();
+                    if (method_exists($dbInstance, 'getEnvironmentInfo')) {
+                        $env = $dbInstance->getEnvironmentInfo();
+                        echo htmlspecialchars($env['environment']);
+                    } else { echo "Localhost"; }
+                } catch(Exception $e) { echo "Bağlantı Yok"; }
+            ?>
+        </div>
+    </div>
+
+    <script>
+        // Şifre Göster/Gizle
+        document.getElementById('passwordToggle').addEventListener('click', function() {
+            const field = document.getElementById('passwordField');
+            const icon = this.querySelector('i');
+            field.type = field.type === 'password' ? 'text' : 'password';
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+
+        // Buton Kilidi
+        document.querySelector('form').addEventListener('submit', function() {
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').innerHTML = 'Giriş Yapılıyor...';
+        });
+    </script>
+</body>
+</html>
+<?php ob_end_flush(); ?>

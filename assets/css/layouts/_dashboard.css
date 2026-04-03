@@ -1,0 +1,303 @@
+/* =================================================== */
+/* DASHBOARD LAYOUT                                    */
+/* =================================================== */
+
+/* Content Wrapper - Tüm sayfalar için */
+.content_wrapper {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    padding: var(--content-padding);
+    min-height: calc(100vh - var(--header-height));
+    background-color: var(--gray-50);
+    transition: margin-left var(--transition-normal);
+}
+
+.sidebar.collapsed ~ .content_wrapper {
+    margin-left: 70px;
+}
+
+/* Content Area */
+.content {
+    margin-top: 1rem;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    border-left: 4px solid var(--secondary-color);
+    font-weight: 600;
+}
+
+.breadcrumb-item a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--secondary-dark);
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.breadcrumb-item.active.person-name {
+    color: var(--primary-color);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+    color: var(--gray-500);
+    padding: 0 10px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-section h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+/* Date Box */
+.tarih-kutusu {
+    text-align: center;
+    color: var(--secondary-color);
+    font-weight: 600;
+    min-width: 100px;
+    padding: 5px 10px;
+    border-left: 2px solid var(--secondary-color);
+}
+
+.tarih {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.gun {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    text-transform: capitalize;
+    line-height: 1.2;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.quick-action-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    color: var(--gray-800);
+    box-shadow: var(--shadow-sm);
+}
+
+.quick-action-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    color: var(--gray-900);
+}
+
+.quick-action-card i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+    display: block;
+}
+
+.quick-action-card h6 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Recent Activity */
+.recent-activity {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+}
+
+.recent-activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--gray-200);
+}
+
+.recent-activity-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--gray-800);
+}
+
+.activity-time {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Responsive Dashboard */
+@media (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .content_wrapper {
+        margin-left: 0;
+        padding: 10px;
+    }
+    
+    .sidebar.collapsed ~ .content_wrapper {
+        margin-left: 0;
+    }
+    
+    .sidebar:not(.collapsed) ~ .content_wrapper {
+        margin-left: 250px;
+    }
+    
+    .welcome-section {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .tarih-kutusu {
+        border-left: none;
+        border-top: 2px solid var(--secondary-color);
+        padding-top: 10px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .content_wrapper {
+        margin-left: 0 !important;
+        padding: 8px;
+    }
+    
+    .breadcrumb {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .recent-activity {
+        padding: 15px;
+    }
+    
+    .recent-activity-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}

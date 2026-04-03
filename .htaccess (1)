@@ -1,0 +1,6 @@
+Options +Indexes +FollowSymLinks
+# DirectoryIndex index.php dashboard.php login.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine Off
+</IfModule>

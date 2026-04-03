@@ -1,0 +1,46 @@
+-- VERİTABANI TABLO SÜTUN LİSTELEME
+
+SELECT 
+    TABLE_NAME,
+    GROUP_CONCAT(CONCAT(COLUMN_NAME, ' (', DATA_TYPE, ')') ORDER BY ORDINAL_POSITION SEPARATOR ', ') AS COLUMNS
+FROM 
+    INFORMATION_SCHEMA.COLUMNS
+WHERE 
+    TABLE_SCHEMA = 'personel_takip'
+GROUP BY 
+    TABLE_NAME
+ORDER BY 
+    TABLE_NAME ASC;
+
+
+
+SELECT TABLE_NAME, COLUMN_NAME, DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'personel_takip'
+ORDER BY TABLE_NAME, ORDINAL_POSITION;
+
+
+
+-- 1. PERSONEL
+SELECT * FROM personel WHERE tc_no = '43735507048';
+
+-- 2. KİMLİK
+SELECT * FROM personel_kimlik WHERE personel_id = (SELECT id FROM personel WHERE tc_no = '43735507048');
+
+-- 3. GÖREV
+SELECT * FROM personel_gorev WHERE personel_id = (SELECT id FROM personel WHERE tc_no = '43735507048');
+
+-- 4. KADRO
+SELECT * FROM personel_kadro WHERE personel_id = (SELECT id FROM personel WHERE tc_no = '43735507048');
+
+-- 5. EĞİTİM
+SELECT * FROM personel_egitim WHERE personel_id = (SELECT id FROM personel WHERE tc_no = '43735507048');
+
+-- 6. İLETİŞİM
+SELECT * FROM personel_iletisim WHERE personel_id = (SELECT id FROM personel WHERE tc_no = '43735507048');
+
+-- 7. SÖZLEŞME (doğru sütun isimleriyle)
+SELECT * FROM personel_sozlesme WHERE personel_id = (SELECT id FROM personel WHERE tc_no = '43735507048');
+
+-- 8. ÖNCEKİ KURUM (sütun isimlerini öğrendikten sonra)
+SELECT * FROM personel_onceki_kurum WHERE personel_id = (SELECT id FROM personel WHERE tc_no = '43735507048');
